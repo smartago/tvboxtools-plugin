@@ -20,21 +20,9 @@
     "launcher",
     "provisioning"
   ],
-  "icon": "./icon.png",
+  "icon": "./icon.svg",
   "documentationUrl": "https://tvboxtools.com/boxsetupai",
   "supportUrl": "https://github.com/smartago/tvboxtools/issues",
   "privacyPolicyUrl": "https://tvboxtools.com/privacy/",
-  "termsOfServiceUrl": "https://tvboxtools.com/terms/",
-  "userConfig": {
-    "target": {
-      "type": "string",
-      "title": "What the box is for",
-      "description": "launcher = a home TV with Premium TV Launcher (the default). hotel = a hotel or rental TV with Hotel TV (kiosk profile, owner link code).",
-      "options": [
-        "launcher",
-        "hotel"
-      ],
-      "default": "launcher"
-    }
-  }
+  "termsOfServiceUrl": "https://tvboxtools.com/terms/"
 }

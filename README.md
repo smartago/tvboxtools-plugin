@@ -6,7 +6,7 @@ on Wi-Fi or USB, check it, install a launcher, make it the HOME app, test it acr
 report of every command that ran. You stay in front of the TV and only press what has to be pressed there
 (Allow, pick the launcher); Claude does the rest from your computer.
 
-![TV Box Tools](./icon.png)
+![TV Box Tools](./icon.svg)
 
 ## What you need
 
@@ -19,11 +19,8 @@ report of every command that ran. You stay in front of the TV and only press wha
 The server runs on your computer, so the plugin works in Claude Code and in Cowork on the desktop app.
 It does not run in chat on the web or on mobile, which cannot reach a box on your home network.
 
-## Settings
-
-| Setting | Values | Meaning |
-| - | - | - |
-| `target` | `launcher` (default), `hotel` | `launcher`: a home TV with Premium TV Launcher. `hotel`: a hotel or rental TV with Hotel TV, kiosk profile and owner link code. |
+The plugin sets a box up with Premium TV Launcher, or with any launcher already on the box. Hotel and rental
+TVs (Hotel TV, kiosk mode) are set up with the TV Box Tools app: <https://hoteltvapp.com/kiosk-manager/>.
 
 ## Tools
 
@@ -35,7 +32,6 @@ It does not run in chat on the web or on mobile, which cannot reach a box on you
 | `check` | no | Model, Android version, current HOME app, installed launcher, accounts, free space |
 | `install` | yes | Installs the apps listed in the manifest, after checking each file's SHA-256 |
 | `provision` | yes | Install → set HOME (switches the stock launcher off with `pm disable-user`, data kept) → permission grants → test. `dryRun: true` only lists the commands |
-| `link` | yes | Hotel target: links the box to the owner's account with their 8-digit code |
 | `test` | yes (reboots) | HOME key, checks who answers HOME, screenshot on the box, reboot |
 | `screenshot` | no | PNG of what the TV shows now |
 | `report` | no | Every command of this session with its result |
@@ -47,8 +43,7 @@ system apps are refused outright. To undo a launcher change, use **Restore** in 
 
 ## What it runs, sends and fetches
 
-- **Runs:** `node server/tvboxtools.mjs --mcp --no-shell` from this plugin, with `TVLM_TARGET` set to the
-  `target` setting. `server/tvboxtools.mjs` is built, unminified, from the open source code in
+- **Runs:** `node server/tvboxtools.mjs --mcp --no-shell` from this plugin. `server/tvboxtools.mjs` is built, unminified, from the open source code in
   <https://github.com/smartago/tvboxtools> (Apache-2.0); the modules it loads are in `server/node_modules`,
   copied unchanged from their npm releases, each with its license (list: `server/THIRD_PARTY.md`). Nothing is
   downloaded or installed when the plugin starts. For Android 11+ pairing it calls Google's `adb pair` if
@@ -57,8 +52,7 @@ system apps are refused outright. To undo a launcher change, use **Restore** in 
   the subnet you name), the ADB connection to the box you choose, and a local Google adb server on
   127.0.0.1:5037 if one is running.
 - **From the internet (only for `install` and `provision`):** the app manifest from
-  `https://tvboxtools.com/dl/manifest.json` (or `https://hoteltvapp.com/dl/manifest.json` for the hotel
-  target) and the APK files it lists. APKs are streamed to the box and not saved on the computer.
+  `https://tvboxtools.com/dl/manifest.json` and the APK files it lists. APKs are streamed to the box and not saved on the computer.
 - **Sends:** nothing to us or anyone else. No telemetry, no accounts, no analytics. The session report stays
   in the server's memory and is gone when it stops.
 - **Stores on your computer:** its own ADB key in `~/.tvlm/` (so the TV remembers "Always allow"). It also

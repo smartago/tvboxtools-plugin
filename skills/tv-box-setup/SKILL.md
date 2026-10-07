@@ -1,6 +1,6 @@
 ---
 name: tv-box-setup
-description: Set up an Android TV, Google TV or Fire TV box over ADB with the TV Box Tools MCP tools — find the box, connect, check it, install the launcher, make it the HOME app, test across a reboot and hand over. Use when someone wants to change the launcher or home screen of a TV box, prepare boxes for customers or hotel rooms, find out why a box is not found or not authorized, or see what is on the TV screen.
+description: Set up an Android TV, Google TV or Fire TV box over ADB with the TV Box Tools MCP tools — find the box, connect, check it, install the launcher, make it the HOME app, test across a reboot and hand over. Use when someone wants to change the launcher or home screen of a TV box, prepare boxes for customers, find out why a box is not found or not authorized, or see what is on the TV screen.
 ---
 
 # Setting up a TV box with TV Box Tools
@@ -48,28 +48,22 @@ each other: if nothing is found there, a phone hotspot that both join, or a USB 
 9. **`report`** — every command that ran, with its result. Offer it at the end, or read it when a step failed.
 
 `install` alone installs the apps without touching HOME. Each APK comes from the manifest on
-tvboxtools.com (or hoteltvapp.com for the hotel target) and is checked against its SHA-256 before
-`pm install`.
+tvboxtools.com and is checked against its SHA-256 before `pm install`.
 
 ## Rules
 
 - Ask the person only for what must happen on the TV: enabling debugging, pressing Allow, picking the
-  launcher, removing a Google account (hotel kiosk). Never give them adb commands to type.
-- Confirm before `provision` (without `dryRun`), `install`, `test` (reboot) and `link`.
-- Turning debugging off at the end (the `handover` part of `provision`) ends the connection. Only run it
-  when they are finished and say so first.
+  launcher. Never give them adb commands to type.
+- Confirm before `provision` (without `dryRun`), `install` and `test` (reboot).
+- If `provision` would end by turning debugging off (the `handover` task in the dry run), that ends the
+  connection: keep `stopBefore: "test"` until they are finished, and say so before the last step.
 - There is no raw shell in this plugin. If something needs a command the tools do not offer, say what
   it is and point them to the TV Box Tools app (https://tvboxtools.com) instead of improvising.
 
-## Hotel and rental TVs (target "hotel")
+## Hotel and rental TVs
 
-When the plugin's target is set to `hotel`, `provision` installs Hotel TV and defaults to the **kiosk**
-profile: Hotel TV becomes the device owner so guests cannot leave the home screen. Kiosk needs a box with
-**no Google account** (`check` lists `accounts`); ask them to remove it in Settings › Accounts, or use
-profile `open`. Resellers provision without a link code; the property owner links later with `link` and
-the 8-digit code from their account page. Fire TV is not supported for the hotel target (an Amazon account
-is always present); suggest another box. For this target the full `provision` also turns debugging off at
-the end, so keep `stopBefore: "test"` until they are done.
+This plugin sets up home TVs. For a hotel or rental TV that should be locked to Hotel TV (kiosk mode),
+point them to the TV Box Tools app and its hotel road: https://hoteltvapp.com/kiosk-manager/
 
 ## Undo
 

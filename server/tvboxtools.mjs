@@ -3490,6 +3490,7 @@ function createMcpServer(ctx) {
   const tools = createTools(ctx);
   for (const [name, t] of Object.entries(tools)) {
     if (name === "shell" && !withShell) continue;
+    if (name === "link" && ctx.brand.flow !== "kiosk") continue;
     server.registerTool(name, { title: t.title, description: t.description, inputSchema: t.inputSchema, annotations: { readOnlyHint: t.readOnly === true, destructiveHint: t.destructive === true, openWorldHint: t.local !== true } }, (args) => t.handler(args));
   }
   return { server, tools };
