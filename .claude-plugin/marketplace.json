@@ -1,0 +1,15 @@
+{
+  "name": "tvboxtools",
+  "description": "TV Box Tools: set up Android TV boxes over ADB from Claude.",
+  "owner": {
+    "name": "Smartago",
+    "email": "hello@smartago.net"
+  },
+  "plugins": [
+    {
+      "name": "tvboxtools",
+      "source": "./",
+      "description": "Set up Android TV, Google TV and Fire TV boxes from your computer over ADB: find the box on Wi-Fi or USB, read its state, install apps with SHA-256 checks, make a launcher the HOME app, test it across a reboot and get a report of every command."
+    }
+  ]
+}
