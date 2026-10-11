@@ -22,6 +22,32 @@ It does not run in chat on the web or on mobile, which cannot reach a box on you
 The plugin sets a box up with Premium TV Launcher, or with any launcher already on the box. Hotel and rental
 TVs (Hotel TV, kiosk mode) are set up with the TV Box Tools app: <https://hoteltvapp.com/kiosk-manager/>.
 
+## Install in Claude Code
+
+```
+claude plugin marketplace add smartago/tvboxtools-plugin
+claude plugin install tvboxtools@tvboxtools
+```
+
+## Use it with any MCP client
+
+The server is a plain stdio MCP server, so it also works in Claude Desktop, Cursor, VS Code, Windsurf and
+other MCP clients. Clone this repository and add it to your client's MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "tvboxtools": {
+      "command": "node",
+      "args": ["/path/to/tvboxtools-plugin/server/tvboxtools.mjs", "--mcp", "--no-shell"]
+    }
+  }
+}
+```
+
+Use the full path to where you cloned it (on Windows, forward slashes work: `C:/Users/you/tvboxtools-plugin/...`).
+Other clients get the same nine tools; the guided setup in `skills/` is written for Claude.
+
 ## Tools
 
 | Tool | Changes the box? | What it does |
