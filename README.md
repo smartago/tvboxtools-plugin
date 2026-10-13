@@ -1,5 +1,7 @@
 # TV Box Tools for Claude
 
+[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/smartago/tvboxtools-plugin)
+
 Set up Android TV, Google TV and Fire TV boxes by asking Claude. The plugin gives Claude the
 [TV Box Tools](https://tvboxtools.com) MCP server and a skill that walks through the setup: find the box
 on Wi-Fi or USB, check it, install a launcher, make it the HOME app, test it across a reboot, and show a
